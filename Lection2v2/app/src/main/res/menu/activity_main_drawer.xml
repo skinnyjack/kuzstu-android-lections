@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_lection1"
+            android:icon="@android:drawable/ic_menu_day"
+            android:title="Лекция 1" />
+        <item
+            android:id="@+id/nav_lection2"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Лекция 2" />
+        <item
+            android:id="@+id/nav_lection3"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Лекция 3" />
+        <item
+            android:id="@+id/nav_lection4"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Лекция 4" />
+    </group>
+
+    <item android:title="Всякое">
+        <menu>
+            <item
+                android:id="@+id/nav_prefs"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="Настройки" />
+        </menu>
+    </item>
+
+</menu>
