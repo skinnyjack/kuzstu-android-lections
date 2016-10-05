@@ -101,6 +101,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_lection2:
                 frame = new Lection2();
                 break;
+            case R.id.nav_lection2a:
+                frame = new Lection2PreferenceFragment();
+                break;
             case R.id.nav_lection3:
                 frame = new Lection3();
                 break;
