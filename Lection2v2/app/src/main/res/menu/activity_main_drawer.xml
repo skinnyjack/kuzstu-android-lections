@@ -11,6 +11,10 @@
             android:icon="@android:drawable/ic_menu_edit"
             android:title="Лекция 2" />
         <item
+            android:id="@+id/nav_lection2a"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Лекция 2.1" />
+        <item
             android:id="@+id/nav_lection3"
             android:icon="@android:drawable/ic_menu_delete"
             android:title="Лекция 3" />
