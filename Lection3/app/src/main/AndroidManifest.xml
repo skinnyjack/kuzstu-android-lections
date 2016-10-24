@@ -27,6 +27,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".Lection2Activity" />
+
+        <receiver
+            android:name="MyWidget"
+            android:icon="@android:drawable/star_big_off"
+            android:label="@string/widget_name">
+            <intent-filter>
+                <action
+                    android:name="android.appwidget.action.APPWIDGET_UPDATE">
+                </action>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_metadata">
+            </meta-data>
+        </receiver>
+
     </application>
 
 </manifest>

@@ -10,4 +10,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Всякие настройки</string>
     <string name="title_activity_lection2_preference">Lection2Preference</string>
+
+    <string name="widget_name">Май фёрст видгет</string>
+    <string name="widget_text">Ну и зачем ты это делаешь?</string>
 </resources>
