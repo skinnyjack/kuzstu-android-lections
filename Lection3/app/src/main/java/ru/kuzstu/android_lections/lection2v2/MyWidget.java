@@ -3,16 +3,13 @@ package ru.kuzstu.android_lections.lection2v2;
 import java.util.Arrays;
 
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.RemoteViews;
 
 /**
@@ -36,6 +33,7 @@ public class MyWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+        //перебираем экземпляры
         for (int i : appWidgetIds) {
             updateWidget(context, appWidgetManager, i);
         }
@@ -59,10 +57,8 @@ public class MyWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        String action = intent.getAction();
         String actionName = UberiteEtoOtsuda;
         if (intent.getAction().equalsIgnoreCase(actionName)) {
-
             int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
             Bundle extras = intent.getExtras();
             if (extras != null) {
@@ -95,11 +91,20 @@ public class MyWidget extends AppWidgetProvider {
 
         RemoteViews widgetView = new RemoteViews(ctx.getPackageName(),
                 R.layout.widget);
+        //обновляем текствью
         widgetView.setTextViewText(R.id.tv, ctx.getString(R.string.widget_text)+" "+ count);
 
+        //создаем и вешаем интент
         Intent intent = new Intent(ctx, MyWidget.class);
         intent.setAction(UberiteEtoOtsuda);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetID);
+        //создаем PendingIntent, чтобы приложение могло само отправлять интенты от имени ользователя
+        /* Принимает на вход
+        context – тут все понятно.
+        requestCode – своего рода ключи, чтобы отличать один PendingIntent от других при необходимости.
+        intent – этот Intent будет впоследствии использован для вызова activity/broadcast/service (в зависимости от метода создания)
+        flags – флаги, влияющие на поведение и создание PendingIntent
+         */
         PendingIntent pendingIntent = PendingIntent.getBroadcast(ctx,
                 widgetID, intent, 0);
         widgetView.setOnClickPendingIntent(R.id.btnwidget, pendingIntent);
