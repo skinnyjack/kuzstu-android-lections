@@ -101,12 +101,13 @@ public class Lection3 extends Fragment implements SensorEventListener, LocationL
         requestMultiplePermissions();
         //Запрос разрешений выполняется асинхронно, поэтому лучше убедиться что все необходимые разрешения получены
         if(
-                result.getContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                result.getContext().checkSelfPermission(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED &&
-                result.getContext().checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED &&
-                result.getContext().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                result.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                result.getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+
+                ActivityCompat.checkSelfPermission(result.getContext(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(result.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(result.getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(result.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(result.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(result.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                 ){
             barrelRoll();
         }
@@ -192,6 +193,18 @@ public class Lection3 extends Fragment implements SensorEventListener, LocationL
         }
         super.onStop();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(locManager != null){
+            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2, this);
+        }
+        if(sensManager != null && accelerometer != null){
+            sensManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
     //Код в активити и обработчиках кнопок выполняется в том же потоке что и отрисовка интерфейса,
     //поэтому, чтобы интерфейс не подвисал на продолжительных задачах их нужно выносить в AsyncTask
     //Также из AsyncTask можно отображать прогресс
